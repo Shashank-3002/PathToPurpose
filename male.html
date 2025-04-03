@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Male Life Expectancy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.tailwindcss.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap"
+        rel="stylesheet">
+        <link rel="icon" href="bussiness-man.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #e0e0e0;
+            /* Adjusted default text color for better contrast */
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 1.75rem;
+                /* Decrease h1 size for small screens */
+            }
+
+            .gender-section-card {
+                flex-direction: column;
+                /* Stack elements vertically */
+                text-align: center;
+                /* Center text on small devices */
+            }
+
+            .profile-img {
+                width: 10rem;
+                /* Adjust image size */
+                height: 10rem;
+                /* Keep aspect ratio */
+            }
+
+            .link-button {
+                width: 100%;
+                /* Button takes full width */
+                justify-content: center;
+            }
+        }
+
+        /* Adjustments for larger screens */
+        @media (min-width: 641px) {
+            .gender-section-card {
+                flex-direction: row;
+                /* Align elements side by side on larger screens */
+            }
+
+            .profile-img {
+                width: 12rem;
+                /* Standard size for larger screens */
+                height: 12rem;
+                /* Standard size for larger screens */
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+
+        .slide-in-down {
+            animation: slideInDown 1s ease-out forwards;
+        }
+
+        .slide-in-up {
+            animation: slideInUp 1s ease-out forwards .2s;
+        }
+
+        /* Apply Playfair Display specifically to the header H1 */
+        #headings {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Input field styling */
+        .input-field {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Slightly lighter background */
+            color: #ffffff;
+            /* Ensure text is white */
+        }
+
+        .input-field:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+            background-color: rgba(255, 255, 255, 0.2);
+            /* Slightly lighter on focus */
+        }
+
+        /* Style date input placeholder text color */
+        .input-field::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            /* Make calendar icon white */
+        }
+
+        /* Button styling */
+        .calculator-btn {
+            transition: all 0.3s ease;
+        }
+
+        .calculator-btn:hover {
+            transform: scale(1.05);
+            background-color: #2980b9;
+            /* Slightly darker blue on hover */
+        }
+
+        .calculator-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Time unit styling */
+        .time-unit {
+            transition: all 0.3s ease;
+            background-color: rgba(30, 60, 114, 0.5);
+            /* Adjusted background color */
+        }
+
+        .time-unit:hover {
+            background-color: rgba(42, 82, 152, 0.7);
+            /* Adjusted hover background */
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center text-white">
+
+    <header class="w-full mb-6 pb-5 px-15 p-4 pt-4">
+        <div class="text-center max-w-4x mx-auto bg-black/30 backdrop-blur-sm p-4 rounded-xl shadow-lg slide-in-down">
+            <h1 id="headings" class="text-2xl font-bold text-gray-100 mb-1 italic">
+                Your Time, Your Life: Make the Most of It
+            </h1>
+            <hr class="border-t border-gray-400/60 my-2 mx-auto w-2/6">
+        </div>
+    </header>
+
+    <div class="bg-white/10 backdrop-blur-lg rounded-xl items-center justify-center p-6 w-full max-w-md shadow-2xl">
+        <h1 class="text-3xl font-bold text-center mb-6 text-blue-300">Male Life Journey</h1>
+
+        <div class="mb-4">
+            <label class="block text-blue-200 mb-2">Date of Birth</label>
+            <input type="date" id="birthDate" class="w-full p-3 text-white input-field rounded-lg placeholder-gray-400">
+        </div>
+
+        <button onclick="calculateLifeRemaining()" class="w-full bg-blue-600 text-white p-3 rounded-lg calculator-btn">
+            Calculate Your Journey
+        </button>
+
+        <div id="result" class="mt-6 text-center hidden">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-200" id="timeLeftMessage"></h2>
+
+            <div id="timeBreakdown" class="grid grid-cols-2 gap-4 mt-6">
+                <div class="time-unit bg-blue-800/50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-300" id="yearsLeft">0</h3>
+                    <p class="text-blue-200">Years</p>
+                </div>
+                <div class="time-unit bg-blue-800/50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-300" id="monthsLeft">0</h3>
+                    <p class="text-blue-200">Months</p>
+                </div>
+                <div class="time-unit bg-blue-800/50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-300" id="weeksLeft">0</h3>
+                    <p class="text-blue-200">Weeks</p>
+                </div>
+                <div class="time-unit bg-blue-800/50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-blue-300" id="daysLeft">0</h3>
+                    <p class="text-blue-200">Days</p>
+                </div>
+            </div>
+
+            <div id="motivationalContent" class="mt-6">
+                <p id="quote" class="text-lg italic text-blue-100"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const LIFE_EXPECTANCY = 70.9; // Average Male life expectancy can vary, adjust as needed
+
+        const MOTIVATIONAL_QUOTES = [
+            "Strength is not just physical, but mental and emotional.",
+            "Every challenge is an opportunity to grow.",
+            "Your potential is limited only by your imagination.",
+            "Leadership is about making others better as a result of your presence.",
+            "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "The measure of a man is what he does with power.",
+            "Waste no more time arguing about what a good man should be. Be one.",
+            "The man who moves a mountain begins by carrying away small stones.",
+            "Discipline is the bridge between goals and accomplishment."
+        ];
+
+        function calculateLifeRemaining() {
+            const birthDateInput = document.getElementById('birthDate');
+            const resultDiv = document.getElementById('result');
+            const timeLeftMessage = document.getElementById('timeLeftMessage');
+            const quoteElement = document.getElementById('quote');
+
+            const birthDate = new Date(birthDateInput.value);
+
+            if (isNaN(birthDate)) {
+                alert('Please enter a valid birth date');
+                return;
+            }
+
+            const today = new Date();
+            const age = today.getFullYear() - birthDate.getFullYear();
+
+            const yearsLeft = Math.max(0, LIFE_EXPECTANCY - age);
+            const monthsLeft = Math.floor(yearsLeft * 12);
+            const weeksLeft = Math.floor(yearsLeft * 52);
+            const daysLeft = Math.floor(yearsLeft * 365);
+
+            resultDiv.classList.remove('hidden');
+
+            document.getElementById('yearsLeft').textContent = yearsLeft.toFixed(1);
+            document.getElementById('monthsLeft').textContent = monthsLeft;
+            document.getElementById('weeksLeft').textContent = weeksLeft;
+            document.getElementById('daysLeft').textContent = daysLeft;
+
+            timeLeftMessage.innerHTML = yearsLeft > 0
+                ? `You have <span class="text-blue-300">${yearsLeft.toFixed(1)} years</span> to shine!`
+                : 'Every moment is your moment!';
+
+
+            const randomQuote = MOTIVATIONAL_QUOTES[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length)];
+            quoteElement.textContent = `"${randomQuote}"`;
+
+            // Animate Time Breakdown boxes entrance
+            gsap.fromTo("#timeBreakdown > div", // Target direct children divs
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, delay: 0.2 } // Stagger animation
+            );
+
+        }
+
+        // GSAP Plugin Registration (Important for text animation)
+        gsap.registerPlugin(TextPlugin);
+
+    </script> <br><br><br>
+    <footer class="w-full mt-auto p-3 py-2 px-4 bg-black/50 text-center text-gray-300 text-sm">
+        <div class="mt-4 flex justify-center space-x-4">
+            <a href="https://www.instagram.com/shashank.vn/" target="_blank" class="text-gray-300 hover:text-white social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://github.com/Shashank-3002" target="_blank" class="text-gray-300 hover:text-white social-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/shashank-naragundmath-980617288" target="_blank" class="text-gray-300 hover:text-white social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <div class="mt-4 p-3">
+            <a href="https://ig.me/m/shashank.vn" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-10 rounded-full">
+                Feedback
+            </a>
+        </div>
+        <p class="mt-3 p-8 pb-1">&copy; <span id="currentYear"></span> Life is a Journey Insights. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
