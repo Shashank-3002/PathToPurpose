@@ -3,142 +3,312 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goals Planner — Productivity Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Inclusive Life Expectancy</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.tailwindcss.com">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="transgender.png" type="image/x-icon">
     <style>
         body {
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background: linear-gradient(135deg, #6a0dad, #9b59b6);
-            color: #fff;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #6a0dad 0%, #9b59b6 100%);
+            /* Purple gradient */
+            color: #2c3e50;
         }
 
-        .card {
-            background: rgba(0, 0, 0, 0.25);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+
+        .slide-in-down {
+            animation: slideInDown 1s ease-out forwards;
+        }
+
+        .slide-in-up {
+            animation: slideInUp 1s ease-out forwards .2s;
+        }
+
+        /* Apply Playfair Display specifically to the header H1 */
+        #headings {
+            font-family: 'Playfair Display', serif;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 1.75rem;
+                /* Decrease h1 size for small screens */
+            }
+
+            .gender-section-card {
+                flex-direction: column;
+                /* Stack elements vertically */
+                text-align: center;
+                /* Center text on small devices */
+            }
+
+            .profile-img {
+                width: 10rem;
+                /* Adjust image size */
+                height: 10rem;
+                /* Keep aspect ratio */
+            }
+
+            .link-button {
+                width: 100%;
+                /* Button takes full width */
+                justify-content: center;
+            }
+        }
+
+        /* Adjustments for larger screens */
+        @media (min-width: 641px) {
+            .gender-section-card {
+                flex-direction: row;
+                /* Align elements side by side on larger screens */
+            }
+
+            .profile-img {
+                width: 12rem;
+                /* Standard size for larger screens */
+                height: 12rem;
+                /* Standard size for larger screens */
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .input-field {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .input-field:focus {
+            border-color: #48bb78;
+            box-shadow: 0 0 10px rgba(72, 187, 120, 0.3);
+        }
+
+        .calculator-btn {
+            background-color: #581674;
+            /* Default purple color */
+            transition: all 0.3s ease;
+        }
+
+        .calculator-btn:hover {
+            transform: scale(1.05);
+            background-color: #732d91;
+            /* Darker purple for hover */
+        }
+
+        .calculator-btn:active {
+            transform: scale(0.95);
+        }
+
+        .time-unit {
+            transition: all 0.3s ease;
+        }
+
+        .time-unit:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
         }
     </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center py-12 px-4">
-    <div class="w-full max-w-3xl rounded-2xl p-8 shadow-2xl card">
-        <h1 class="text-3xl font-bold mb-2">Goals Planner</h1>
-        <p class="text-sm mb-6">Capture goals, split them into actionable steps, and track your progress over time.
-        </p>
+<body class="min-h-screen flex flex-col items-center text-white">
+    <header class="w-full mb-6 pb-5 px-15 p-4 pt-4">
+        <div class="text-center max-w-4x mx-auto bg-black/30 backdrop-blur-sm p-4 rounded-xl shadow-lg slide-in-down">
+            <h1 id="headings" class="text-2xl font-bold text-gray-100 mb-1 italic">
+                Your Life, Your Choice: Choose to Live an Extraordinary Life
+            </h1>
+            <hr class="border-t border-gray-400/60 my-2 mx-auto w-3/6">
+        </div>
+    </header>
+    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-8 w-full max-w-md shadow-2xl">
+        <h1 class="text-3xl font-bold text-center mb-6 text-purple-200">Inclusive Life Journey</h1>
 
-        <div class="flex gap-2 mb-4">
-            <input id="goalTitle" placeholder="New goal title" class="flex-1 p-2 rounded text-black">
-            <button id="addGoal"
-                class="bg-purple-700 hover:bg-purple-800 text-white py-2 px-4 rounded">Add Goal</button>
+        <div class="mb-4">
+            <label class="block text-purple-100 mb-2">Date of Birth</label>
+            <input type="date" id="birthDate" class="w-full p-3 bg-white/20 text-white input-field rounded-lg">
         </div>
 
-        <div id="goalsContainer" class="space-y-4"></div>
+        <button onclick="calculateLifeRemaining()" class="w-full text-white p-3 rounded-lg calculator-btn">
+            Calculate Your Journey
+        </button>
+
+        <div id="result" class="mt-6 text-center hidden">
+            <h2 class="text-2xl font-semibold mb-4 text-purple-200" id="timeLeftMessage"></h2>
+
+            <div id="timeBreakdown" class="grid grid-cols-2 gap-4 mt-6">
+                <div class="time-unit bg-purple-800/50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-purple-300" id="yearsLeft">0</h3>
+                    <p class="text-purple-200">Years</p>
+                </div>
+                <div class="time-unit bg-purple-800/50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-purple-300" id="monthsLeft">0</h3>
+                    <p class="text-purple-200">Months</p>
+                </div>
+                <div class="time-unit bg-purple-800/50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-purple-300" id="weeksLeft">0</h3>
+                    <p class="text-purple-200">Weeks</p>
+                </div>
+                <div class="time-unit bg-purple-800/50 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-purple-300" id="daysLeft">0</h3>
+                    <p class="text-purple-200">Days</p>
+                </div>
+            </div>
+
+            <div id="motivationalContent" class="mt-6">
+                <p id="quote" class="text-lg italic text-green-100"></p>
+            </div>
+        </div>
     </div>
 
-    <script>
-        const container = document.getElementById('goalsContainer');
-        const addGoalBtn = document.getElementById('addGoal');
-        const goalTitleInput = document.getElementById('goalTitle');
+        <script>
+            const LIFE_EXPECTANCY = 73.5; // Average life expectancy for other genders
 
-        let goals = JSON.parse(localStorage.getItem('goals_v1') || '[]');
+            const MOTIVATIONAL_QUOTES = [
+                "Your journey is unique, and so is your potential.",
+                "Embrace your authenticity, it is your greatest strength.",
+                "Every individual has a story worth telling.",
+                "Diversity is not about how different we are, but about how beautifully we can come together.",
+                "Your identity is a canvas, and you are the artist."
+            ];
 
-        function save() {
-            localStorage.setItem('goals_v1', JSON.stringify(goals));
-        }
+            function calculateLifeRemaining() {
+                const birthDateInput = document.getElementById('birthDate');
+                const resultDiv = document.getElementById('result');
+                const timeLeftMessage = document.getElementById('timeLeftMessage');
+                const quoteElement = document.getElementById('quote');
 
-        function render() {
-            container.innerHTML = '';
-            goals.forEach((gIdx) => { });
-            goals.forEach((g, idx) => {
-                const div = document.createElement('div');
-                div.className = 'p-4 rounded bg-white/5';
+                const birthDate = new Date(birthDateInput.value);
 
-                const title = document.createElement('div');
-                title.className = 'flex items-center justify-between mb-2';
-                title.innerHTML = `<div class=\"font-semibold text-lg\">${g.title}</div>`;
+                if (isNaN(birthDate)) {
+                    alert('Please enter your birth date');
+                    return;
+                }
 
-                const progress = document.createElement('div');
-                const totalSteps = g.steps.length || 0;
-                const doneSteps = g.steps.filter(s => s.done).length;
-                const pct = totalSteps === 0 ? 0 : Math.round((doneSteps / totalSteps) * 100);
-                progress.innerHTML = `<div class=\"text-xs mb-1\">Progress: ${pct}%</div><div class=\"w-full bg-white/10 rounded h-2\"><div style=\"width:${pct}%\" class=\"h-2 bg-green-400 rounded\"></div></div>`;
+                const today = new Date();
+                const age = today.getFullYear() - birthDate.getFullYear();
 
-                const stepsList = document.createElement('ul');
-                stepsList.className = 'mt-3 space-y-2';
-                g.steps.forEach((s, sIdx) => {
-                    const li = document.createElement('li');
-                    li.className = 'flex items-center justify-between p-2 rounded bg-white/5';
-                    const left = document.createElement('div');
-                    left.innerHTML = `<label class=\"flex items-center gap-2\"><input type=\"checkbox\" ${s.done ? 'checked' : ''}><span class=\"ml-2\">${s.title}</span></label>`;
-                    left.querySelector('input').addEventListener('change', (e) => {
-                        g.steps[sIdx].done = e.target.checked;
-                        save();
-                        render();
-                    });
+                const yearsLeft = Math.max(0, LIFE_EXPECTANCY - age);
+                const monthsLeft = Math.floor(yearsLeft * 12);
+                const weeksLeft = Math.floor(yearsLeft * 52);
+                const daysLeft = Math.floor(yearsLeft * 365);
 
-                    const right = document.createElement('div');
-                    right.innerHTML = `<button class=\"text-xs bg-red-600 hover:bg-red-700 text-white py-1 px-2 rounded\">Delete</button>`;
-                    right.querySelector('button').addEventListener('click', () => {
-                        g.steps.splice(sIdx, 1);
-                        save();
-                        render();
-                    });
+                resultDiv.classList.remove('hidden');
 
-                    li.appendChild(left);
-                    li.appendChild(right);
-                    stepsList.appendChild(li);
-                });
+                document.getElementById('yearsLeft').textContent = yearsLeft.toFixed(1);
+                document.getElementById('monthsLeft').textContent = monthsLeft;
+                document.getElementById('weeksLeft').textContent = weeksLeft;
+                document.getElementById('daysLeft').textContent = daysLeft;
 
-                const addStepRow = document.createElement('div');
-                addStepRow.className = 'mt-3 flex gap-2';
-                const stepInput = document.createElement('input');
-                stepInput.placeholder = 'Add step (e.g., Draft outline)';
-                stepInput.className = 'flex-1 p-2 rounded text-black';
-                const addStepBtn = document.createElement('button');
-                addStepBtn.className = 'bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded';
-                addStepBtn.textContent = 'Add Step';
-                addStepBtn.addEventListener('click', () => {
-                    const v = stepInput.value.trim();
-                    if (!v) return;
-                    g.steps.push({ title: v, done: false });
-                    stepInput.value = '';
-                    save();
-                    render();
-                });
+                timeLeftMessage.innerHTML = yearsLeft > 0
+                    ? `You have <span class="text-purple-300">${yearsLeft.toFixed(1)} years</span> to create your story!`
+                    : 'Every moment is an opportunity for growth!';
 
-                const delGoalBtn = document.createElement('button');
-                delGoalBtn.className = 'mt-3 bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded';
-                delGoalBtn.textContent = 'Delete Goal';
-                delGoalBtn.addEventListener('click', () => {
-                    goals.splice(idx, 1);
-                    save();
-                    render();
-                });
+                const randomQuote = MOTIVATIONAL_QUOTES[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length)];
+                quoteElement.textContent = `"${randomQuote}"`;
 
-                div.appendChild(title);
-                div.appendChild(progress);
-                div.appendChild(stepsList);
-                div.appendChild(addStepRow);
-                addStepRow.appendChild(stepInput);
-                addStepRow.appendChild(addStepBtn);
-                div.appendChild(delGoalBtn);
-
-                container.appendChild(div);
-            });
-        }
-
-        addGoalBtn.addEventListener('click', () => {
-            const t = goalTitleInput.value.trim();
-            if (!t) return;
-            goals.push({ title: t, steps: [] });
-            goalTitleInput.value = '';
-            save();
-            render();
-        });
-
-        render();
-    </script>
+                gsap.fromTo("#timeBreakdown",
+                    { opacity: 0, y: 50 },
+                    { opacity: 1, y: 0, duration: 1, stagger: 0.2 }
+                );
+            }
+        </script>
+        <br><br><br>
+        <footer class="w-full mt-12 py-6 px-4 bg-black/50 text-center text-gray-300 text-sm">
+        <p class="mb-2">This tool offers reflections on life's journey inspired by general life expectancy data.</p>
+        <p class="mb-2">As of recent estimates, the global average life expectancy is around 73 years, but this varies
+            significantly based on location, gender, lifestyle, and access to healthcare.</p>
+        <p>Use these insights for inspiration and mindful living, not as a definitive prediction.</p>
+        <div class="mt-4 flex justify-center space-x-4">
+            <a href="https://www.instagram.com/shashank.vn/" target="_blank" class="text-gray-300 hover:text-white social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://github.com/Shashank-3002" target="_blank" class="text-gray-300 hover:text-white social-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/shashank-naragundmath-980617288" target="_blank" class="text-gray-300 hover:text-white social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <div class="mt-4">
+            <a href="https://ig.me/m/shashank.vn" target="_blank" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-10 rounded-full">
+                Feedback
+            </a>
+        </div>
+        <p class="mt-3 p-8 pb-1">&copy; <span id="currentYear"></span> Life is a Journey Insights. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>
